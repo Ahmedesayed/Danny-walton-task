@@ -1,0 +1,13 @@
+<div class="flex h-screen">
+  <div class="fixed-menu">
+    <app-menu></app-menu>
+  </div>
+  <div class="w-full flex flex-column overflow-x-hidden">
+    <div>
+      <app-header></app-header>
+    </div>
+    <div class="overflow-hidden h-full bg">
+      <router-outlet ></router-outlet>
+    </div>
+  </div>
+</div>

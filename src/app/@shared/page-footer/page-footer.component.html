@@ -1,0 +1,23 @@
+<div
+  class="p-footer w-full flex flex-row-reverse align-items-center justify-content-between bg-white border-1 border-blue-100 p-4"
+>
+  <button
+    pButton
+    [label]="label"
+    [disabled]="disabled"
+    [ngStyle]="{'background-color': disabled ? 'var(--gray-100)' : 'var(--blue-400)'}"
+    class="border-radius border-none"
+    [loading]="loading"
+    [disabled]="loading"
+    (click)="onClick.emit()"
+  ></button>
+
+  <button
+  pButton
+  label="Go Back"
+  class="p-button-text text-900"
+  *ngIf="isBackEnabled"
+  [disabled]="loading"
+  (click)="onBack.emit()"
+></button>
+</div>

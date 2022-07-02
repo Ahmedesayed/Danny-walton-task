@@ -1,0 +1,13 @@
+.half-flex{
+  flex: 0.5;
+}
+
+.prefix{
+  display: block;
+}
+
+@media screen and (max-width: 600px){
+ .prefix{
+   display: none !important;
+ }
+ }

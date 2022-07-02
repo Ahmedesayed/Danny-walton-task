@@ -1,0 +1,29 @@
+<div
+  class="flex flex-wrap {{
+    segments.length ? 'justify-content-between' : 'flex-end'
+  }} align-items-center pt-3 p-1 z-3 mb-3"
+>
+  <div
+    *ngIf="segments.length || title"
+    class="flex justify-content-between align-items-center"
+  >
+    <div *ngIf="title" class="text-xl font-bold flex-1">{{ title }}</div>
+    <div *ngIf="segments.length && !steps">
+      <p-selectButton
+        styleClass="border-round"
+        [options]="segments"
+        [(ngModel)]="selectedSeg"
+        (onOptionClick)="onSegSelection($event.option)"
+        optionLabel="label"
+        optionValue="key"
+      ></p-selectButton>
+    </div>
+
+  </div>
+  <div *ngIf="steps" class="text-blue-400 font-bold" >
+    Step {{selectedSeg}}/{{segments.length}}
+  </div>
+  <div *ngIf="filter" class="flex flex-row-reverse flex-1">
+    <ng-container *ngTemplateOutlet="filter"></ng-container>
+  </div>
+</div>

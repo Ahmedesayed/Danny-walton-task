@@ -1,0 +1,37 @@
+<div class="flex" >
+  <div class="ctn mr-2 ml-2">
+    <label class="mr-2 ml-2 text-800">From</label>
+    <span class="p-input-icon-left">
+      <i class="pi pi-calendar z-1 text-gray-100"></i>
+      <p-calendar
+        styleClass="p-input-icon-left"
+        [showButtonBar]="true"
+        inputStyleClass="border-round border-gray-100 text-sm"
+        placeholder="DD/MM/YY"
+        [(ngModel)]="fromDate"
+        (onSelect)="this.emitDateChange()"
+        (onClearClick)="this.onClearDate('from')"
+        [touchUI]="true"
+        dateFormat="dd/mm/yy"
+      ></p-calendar>
+    </span>
+  </div>
+  <div class="ctn mr-2 ml-2">
+    <label class="mr-2 ml-2 text-800">To</label>
+    <span class="p-input-icon-left">
+      <i class="pi pi-calendar z-1 text-gray-100"></i>
+      <p-calendar
+        styleClass="p-input-icon-left"
+        [showButtonBar]="true"
+        [minDate]="this.fromDate!"
+        inputStyleClass="border-round border-gray-100 text-sm"
+        placeholder="DD/MM/YY"
+        [(ngModel)]="toDate"
+        (onSelect)="this.emitDateChange()"
+        (onClearClick)="this.onClearDate('to')"
+        [touchUI]="true"
+        dateFormat="dd/mm/yy"
+      ></p-calendar>
+    </span>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+#main{
+  flex: 4;
+}
+
+#side{
+  flex: 1.5;
+  display: flex;
+}
+
+
+.item-list{
+  height: 50%;
+}
+
+
+@media screen and (max-width: 1200px){
+  #side{
+    display: none !important;
+  }
+ }

@@ -1,0 +1,13 @@
+@media screen and (max-width: 820px){
+  .fixed-menu{
+    display: none !important;
+  }
+}
+.fixed-menu{
+  display: block;
+}
+
+
+.bg{
+  background-color: var(--blue-0) !important;
+}

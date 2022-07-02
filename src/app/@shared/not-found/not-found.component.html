@@ -1,0 +1,8 @@
+<div class="flex flex-column align-items-center justify-content-center w-full mt-3 text-center" >
+  <img class="mb-2" src="assets/images/no-items-live-view.svg" />
+  <small *ngIf="title" class="text-400 mb-2"
+  >{{title}}</small
+>
+<small *ngIf="subTitle" class="text-400 mb-2">{{subTitle}}</small>
+<button pButton label="TRY AGAIN" class="mt-3" *ngIf="retry" (click)="onRetry.emit()"> </button>
+</div>

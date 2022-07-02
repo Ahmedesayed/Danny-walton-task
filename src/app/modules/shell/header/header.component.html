@@ -1,0 +1,78 @@
+<p-toolbar styleClass="p-0 pt-4 px-3 pb-3">
+  <div class="w-full flex flex-column">
+    <div class="flex align-items-center justify-content-between flex-wrap">
+      <div>
+        <div class="header-title text-blue-600 font-semibold text-2xl">
+          👋 Hello {{ profileSrvc.user?.firstName | titlecase }} {{profileSrvc.user?.lastName}}
+        </div>
+        <div class="b-menu">
+          <button
+            pButton
+            type="button"
+            icon="pi pi-bars"
+            class="p-button-lg p-button-text p-button-rounded"
+            (click)="isMenuVisible = !isMenuVisible"
+          ></button>
+        </div>
+      </div>
+      <div class="flex align-items-center flex-1 justify-content-end">
+        <span class="p-input-icon-left p-input-icon-right vn-search flex-1">
+          <i class="pi pi-search text-gray-50"></i>
+          <input
+            class="border-round border-blue-100"
+            type="text"
+            pInputText
+            placeholder="Search Anything i.e. Driver name, vehicle number etc .. "
+            [(ngModel)]="searchTerm"
+            (keyup)="onSearch()"
+            (keydown)="onSearch()"
+          />
+          <i
+            *ngIf="searchTerm"
+            class="pi pi-times text-gray-50 cursor-pointer"
+            (click)="clear()"
+          ></i>
+        </span>
+        <p-avatar
+          pRipple
+          styleClass="vn-avatar {{router.isActive('/profile',true) ? 'active-avatar' : ''}}"
+          style=""
+          [image]="
+            profileSrvc.user?.imageUrl || 'assets/images/avatar-placeholder.png'
+          "
+          [shape]="'circle'"
+          size="large"
+          (click)="menu.toggle($event)"
+        ></p-avatar>
+        <p-menu
+          #menu
+          styleClass="profile-menu"
+          [popup]="true"
+          [model]="items"
+        ></p-menu>
+      </div>
+    </div>
+    <div class="back mt-2" *ngIf="isBackAvailable">
+      <button
+        pButton
+        type="button"
+        label="Back"
+        icon="pi pi-chevron-left"
+        iconPos="left"
+        class="p-button-text p-button-text text-gray-50"
+        (click)="onBack()"
+      ></button>
+    </div>
+  </div>
+</p-toolbar>
+
+<p-sidebar
+  [showCloseIcon]="false"
+  [closeOnEscape]="true"
+  position="left"
+  [style]="{ width: '115px' }"
+  styleClass=""
+  [(visible)]="isMenuVisible"
+>
+  <app-menu (click)="isMenuVisible = !isMenuVisible"></app-menu>
+</p-sidebar>

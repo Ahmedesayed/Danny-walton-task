@@ -1,0 +1,8 @@
+<div class="ctn mx-2 flex" appTextOverflowBtn>
+  <span
+    class="overflow-x-hidden white-space-nowrap text-overflow-ellipsis font-bold flex-1"
+    [style.fontSize]="textSize"
+    >{{ text }} </span
+  >
+  <div class="more-btn mx-1 text-sm cursor-pointer text-blue-400 underline hidden align-self-center" [pTooltip]="text + ''" tooltipPosition="bottom" >More</div>
+</div>

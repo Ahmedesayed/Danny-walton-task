@@ -1,0 +1,12 @@
+<div class="vn-card flex align-items-center border-round p-3 bg-white mb-3 cursor-pointer" >
+  <p-avatar styleClass="bg-blue-50 text-blue-400" icon="pi {{icon}}" shape="circle"  ></p-avatar>
+  <div class="flex flex-1 flex-column ml-3" >
+    <div class="text-blue-400 font-bold text-xl">
+      {{title}}
+    </div>
+    <div class="text-400 text-sm mt-2" *ngIf="subTitle">
+      <span *ngIf="!isLoading"> {{subTitle}} </span> <p-skeleton [height]="'48px'" *ngIf="isLoading" ></p-skeleton>
+    </div>
+  </div>
+  <i class="pi pi-chevron-right text-blue-400"  ></i>
+</div>

@@ -1,0 +1,130 @@
+<div class="form-bg flex-1">
+  <div class="logo mb-4">
+    <img src="assets/images/logo.png" />
+  </div>
+  <div
+    class="login-form flex flex-column justify-content-center align-items-center w-full px-4"
+  >
+  <div class="col-12 text-blue-400 text-3xl mb-4">Signup</div>
+
+    <form
+      [formGroup]="formGroup"
+      (ngSubmit)="signup()"
+      class="w-full flex flex-column align-items-center px-2"
+    >
+      <div class="field grid w-full mb-4">
+        <label for="username" class="col-12 mb-2 font-bold required"
+          >Username</label
+        >
+        <div class="col-12">
+          <input
+            pInputText
+            id="username"
+            type="text"
+            class="inputfield w-full vn-input border-round shadow-1 border-gray-100 mt-2"
+            placeholder="E.g. a.soliman"
+            maxlength="25"
+            formControlName="username"
+          />
+        </div>
+      </div>
+      <div class="field grid w-full mb-4">
+        <label for="firstName" class="col-12 mb-2 font-bold required"
+          >First Name</label
+        >
+        <div class="col-12">
+          <input
+            pInputText
+            id="firstName"
+            type="text"
+            class="inputfield w-full vn-input border-round shadow-1 border-gray-100 mt-2"
+            placeholder="E.g. Ahmed"
+            maxlength="25"
+            formControlName="firstName"
+          />
+        </div>
+      </div>
+
+      <div class="field grid w-full mb-4">
+        <label for="lastName" class="col-12 mb-2 font-bold required"
+          >Last Name</label
+        >
+        <div class="col-12">
+          <input
+            pInputText
+            id="lastName"
+            type="text"
+            class="inputfield w-full vn-input border-round shadow-1 border-gray-100 mt-2"
+            placeholder="E.g. Soliman"
+            maxlength="25"
+            formControlName="lastName"
+          />
+        </div>
+      </div>
+
+      <div class="field grid w-full mb-4">
+        <label for="email" class="col-12 mb-2 font-bold required">Email</label>
+        <div class="col-12">
+          <input
+            pInputText
+            id="email"
+            type="text"
+            class="inputfield w-full vn-input border-round shadow-1 border-gray-100 mt-2"
+            placeholder="E.g. Ahmed@gmail.com"
+            formControlName="email"
+          />
+        </div>
+      </div>
+
+      <div class="field grid w-full mb-3">
+        <label for="password" class="col-12 mb-2 font-bold required"
+          >Password</label
+        >
+        <div class="col-12">
+          <p-password
+            styleClass="w-full"
+            inputStyleClass="inputfield w-full vn-input border-round shadow-1 border-gray-100 mt-2"
+            formControlName="password"
+          >
+            <ng-template pTemplate="header">
+              <h6>Pick a password</h6>
+            </ng-template>
+            <ng-template pTemplate="footer">
+              <p-divider></p-divider>
+              <p class="mt-2">Suggestions</p>
+              <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+                <li>At least one numeric</li>
+                <li>At least one special character</li>
+                <li>Minimum 10 characters</li>
+              </ul>
+            </ng-template>
+          </p-password>
+        </div>
+      </div>
+
+      <div class="field grid w-full mb-3">
+        <label for="passwordConfirmation" class="col-12 mb-2 font-bold required"
+          >Password Confirmation</label
+        >
+        <div class="col-12">
+          <input
+            pInputText
+            id="passwordConfirmation"
+            type="password"
+            class="inputfield w-full vn-input border-round shadow-1 border-gray-100 mt-2"
+            placeholder="*********"
+            formControlName="passwordConfirmation"
+          />
+        </div>
+      </div>
+    </form>
+
+    <button
+      pButton
+      type="submit"
+      label="SIGNUP"
+      [loading]="isLoading"
+      class="text-2xl bg-blue-400 border-round mt-4"
+    ></button>
+  </div>
+</div>

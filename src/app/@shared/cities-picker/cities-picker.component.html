@@ -1,0 +1,12 @@
+<p-multiSelect
+  appendTo="body"
+  styleClass="vn-input border-round"
+  (onChange)="onCityChanged($event.value)"
+  display="chip"
+  [showToggleAll]="false"
+  placeholder="City"
+  [options]="cities"
+  [optionValue]="optionValue"
+  [(ngModel)]="selectedItems"
+  optionLabel="name"
+></p-multiSelect>

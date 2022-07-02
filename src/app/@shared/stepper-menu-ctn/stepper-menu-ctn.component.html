@@ -1,0 +1,19 @@
+<div class="flex flex-column h-full px-3 pt-3 mb-2">
+  <div class="stepper-ctn flex justify-content-between bg-white h-full w-full">
+    <div id="side" class="flex flex-column h-full">
+      <div *ngIf="isProgressive" class="p-5">
+        <div class="text-3xl mb-4">{{title}}</div>
+        <p-progressBar
+          styleClass="border-round progress-bar-ctn"
+          [value]="progress"
+          [showValue]="false"
+        ></p-progressBar>
+      </div>
+      <div >
+        <p-selectButton styleClass="stepper-select-btn" [options]="selectBtns" [(ngModel)]="selectedBtn" [optionValue]="'value'" (onOptionClick)="onSelectBtn.emit($event.option.value)"></p-selectButton>
+      </div>
+    </div>
+    <div id="main" class="flex flex-column overflow-auto p-3">
+      <ng-content ></ng-content>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<p-dropdown
+  [options]="countries"
+  [optionValue]="'dial_code'"
+  [filter]="true"
+  [filterBy]="'dial_code'"
+  styleClass="vn-input border-round mt-2 sm-dropdown mr-3"
+  appendTo="body"
+  [(ngModel)]="code"
+  [disabled]="disabled"
+>
+  <ng-template let-item pTemplate="selectedItem">
+    <div class="country-item country-item-value">
+      <img [src]="item.flagUrl" /> {{ item.dial_code }}
+    </div>
+  </ng-template>
+  <ng-template let-country pTemplate="item">
+    <div class="country-item">
+      <div><img [src]="country.flagUrl" /> {{ country.dial_code }} ({{ country.code }})</div>
+    </div>
+  </ng-template>
+</p-dropdown>

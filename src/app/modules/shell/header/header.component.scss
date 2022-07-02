@@ -1,0 +1,59 @@
+.vn-search{
+  width: 100%;
+  max-width: 500px;
+  input{
+    width: 100%;
+    height: 44px;
+  }
+  margin: 0 30px;
+}
+
+.back{
+  .p-button-text{
+    padding: 0.5rem 0 !important;
+  }
+
+  .p-button-icon-left{
+    margin-right: 1rem !important;
+  }
+}
+
+
+@media screen and (max-width: 820px){
+  .header-title{
+    display: none !important;
+  }
+  .b-menu{
+    display: block !important;
+  }
+}
+
+.header-title{
+  display: block;
+}
+
+.b-menu{
+  display: none;
+}
+
+:host ::ng-deep{
+  .profile-menu{
+    width: 285px;
+  }
+
+  .p-sidebar-header,.p-sidebar-content{
+    padding: 0 !important;
+  }
+  .p-sidebar-content{
+    border-right: 1px solid var(--blue-400);
+  }
+  .active-avatar{
+    border: 2px solid var(--blue-200);
+    padding: 2px;
+    img{
+      border-radius: 50% !important;
+    }
+  }
+
+}
+
