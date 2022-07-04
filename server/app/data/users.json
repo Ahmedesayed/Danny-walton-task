@@ -1,0 +1,20 @@
+[
+  {
+    "firstName": "ahmed",
+    "lastName": "soliman",
+    "username": "a.soliman96",
+    "email": "a.soliman96@gmail.com",
+    "password": "$2a$10$ipE39mNv0qv7wOE7Njb1xeSCtHOHJUZDw7ThLGOfYfOs2fDIgh9zS",
+    "captcha": false,
+    "id": 1656785530495
+  },
+  {
+    "firstName": "ahmed",
+    "lastName": "soliman",
+    "username": "a.soliman96",
+    "email": "a.soliman96@gmail.com",
+    "password": "$2a$10$k2IkLoGviyrDuObwtjyk.ek1B/09CvnqRXgPn30dnavg9MO9n368y",
+    "captcha": false,
+    "id": 1656785711410
+  }
+]

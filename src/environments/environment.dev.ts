@@ -9,7 +9,7 @@ export const environment = {
   environmentName: 'dev',
   countrySettings: { country: 'UAE', countryCode: '+971', currency: 'AED' },
   version: project.version,
-  apiUrl: 'https://ahoydev.azure-api.net/vendor/',
+  apiUrl: 'http://localhost:3080/api/',
 };
 
 /*

@@ -14,12 +14,6 @@ const routes: Routes = [
           import('../home/home.module').then((m) => m.HomeComponentModule),
         canActivate: [AuthGuard],
       },
-      {
-        path: 'profile',
-        loadChildren: () =>
-          import('../profile/profile.module').then((m) => m.ProfileModule),
-        canActivate: [AuthGuard],
-      },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
     ],
   },

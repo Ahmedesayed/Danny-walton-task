@@ -1,1 +1,1 @@
-ng generate module modules/$name --route $path --module modules/shell/shell.module
+To Run the project please use npm start (inorder to run both angular and node.js)

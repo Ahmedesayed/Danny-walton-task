@@ -1,10 +1,8 @@
+import { AlertService } from './../../../@shared/services/alert/alert.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { finalize } from 'rxjs';
-import { AlertService } from '@app/@shared/services/alert/alert.service';
 import { AuthService } from '../auth.service';
-import { CredentialsService } from '../credentials.service';
 
 @Component({
   selector: 'app-login',
@@ -14,15 +12,10 @@ import { CredentialsService } from '../credentials.service';
 export class LoginComponent implements OnInit {
   isLoading: boolean = false;
   formGroup: FormGroup = new FormGroup({});
-  credentials: any = {};
-  error: string | undefined;
 
   constructor(
     private authSrvc: AuthService,
-    private alertSrvc: AlertService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private credentialsService: CredentialsService
+    private alertSrvc:AlertService
   ) {}
 
   ngOnInit(): void {
@@ -37,13 +30,8 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    // if the user using phone number
-    // and there is no + in front of the number -> add it
-    const phone = this.formGroup.get('username')?.value;
-    if (phone * 1 && phone[0] !== '+') {
-      this.formGroup.get('username')?.setValue(`+${phone}`);
-    }
-
+    this.formGroup.markAllAsTouched()
+    if(this.formGroup.invalid) return;
     this.isLoading = true;
     this.authSrvc
       .login(this.formGroup.value)
@@ -53,36 +41,9 @@ export class LoginComponent implements OnInit {
           this.isLoading = false;
         })
       )
-      .subscribe(
-        (credentials: any) => {
-          // TODO do the OPT here
-          this.credentials = credentials;
-          this.completeLogin(credentials);
-        },
-        (error: any) => {
-          this.error = error;
-        }
-      );
-  }
-  private completeLogin(credentials: any) {
-    this.saveCredentials(credentials);
-    this.router.navigateByUrl(this.getReturnUrl());
+      .subscribe((e)=>{
+        if(!e) this.alertSrvc.showToast({severity:'error',summary:'Username/Email or password is wrong!'})
+      });
   }
 
-  private saveCredentials(credentials: any) {
-    const data = {
-      username: this.formGroup.get('username')?.value,
-      token: credentials.access_token,
-      companyId: '0',
-      refreshToken: credentials.refresh_token,
-      companyName: credentials.companyName,
-      phoneNumber: credentials.phoneNumber,
-      email: credentials.email,
-    };
-    this.credentialsService.setCredentials(data, true);
-  }
-
-  private getReturnUrl() {
-    return this.route.snapshot.queryParams['returnUrl'] || '/';
-  }
 }

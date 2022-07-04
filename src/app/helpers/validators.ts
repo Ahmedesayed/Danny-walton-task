@@ -1,16 +1,21 @@
 import {
   AbstractControl,
+  AsyncValidatorFn,
   FormGroup,
   ValidationErrors,
   ValidatorFn,
 } from '@angular/forms';
+import { UserService } from '@app/@shared/services/user/user.service';
 import * as moment from 'moment';
-import { PhoneHandler } from './phoneNumber';
+import { map } from 'rxjs';
 
 export class CustomValidators {
-  static mustMatch(controlName: string, matchingControlName: string) : ValidatorFn{
+  static mustMatch(
+    controlName: string,
+    matchingControlName: string
+  ): ValidatorFn {
     return (formGroup: AbstractControl) => {
-      const control =  formGroup.get(controlName);
+      const control = formGroup.get(controlName);
       const matchingControl = formGroup.get(matchingControlName);
 
       if (matchingControl?.errors && !matchingControl.errors['mustMatch']) {
@@ -60,30 +65,19 @@ export class CustomValidators {
     };
   }
 
-  // public static checkPhoneNumber(code: string, phone: string) {
-  //   if (code === PhoneHandler.countryCode && phone.startsWith('0')) {
-  //     return false;
-  //   }
-  //   // contains invalid characters
-  //   if (
-  //     phone.indexOf(' ') !== -1 ||
-  //     phone.indexOf('-') !== -1 ||
-  //     phone.indexOf('(') !== -1
-  //   ) {
-  //     return false;
-  //   }
+  static emailExistsValidator(user: UserService): AsyncValidatorFn {
+    return (control: AbstractControl) => {
+      return user
+        .isUniqueEmail(control.value)
+        .pipe(map((valid) => (valid ? null : { emailExists: true })));
+    };
+  }
 
-  //   return PhoneHandler.isValidNumber(`${code}${phone}`);
-  // }
-
-  // public static PhoneNumberValidator() {
-  //   return (control: AbstractControl) => {
-  //     let code = control.get('0')!;
-  //     let phone = control.get('1')!;
-  //     if (!this.checkPhoneNumber(code.value, phone.value))
-  //       phone.setErrors({ wrongNumber: { value: control.value } });
-
-  //     return null;
-  //   };
-  // }
+  static userNameExistsValidator(user: UserService): AsyncValidatorFn {
+    return (control: AbstractControl) => {
+      return user
+        .isUniqueUsername(control.value)
+        .pipe(map((valid) => (valid ? null : { userNameExists: true })));
+    };
+  }
 }

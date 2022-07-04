@@ -1,1 +1,9 @@
-<h2>HOLME</h2>
+<div class="p-4 overflow-y-auto h-full bg-white">
+  <p-scrollTop [threshold]="400" [target]="'parent'"></p-scrollTop>
+  <div
+    class="font-light mb-4 text-900 text-4xl flex align-items-center justify-content-between"
+  >
+    <span>Your Meetings</span>
+  </div>
+  <full-calendar #calendar [options]="options"></full-calendar>
+</div>

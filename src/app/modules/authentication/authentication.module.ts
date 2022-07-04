@@ -1,3 +1,4 @@
+import { MessageModule } from 'primeng/message';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -10,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import {CaptchaModule} from 'primeng/captcha';
 
 @NgModule({
   declarations: [LoginComponent, SignupComponent],
@@ -22,7 +24,9 @@ import { SignupComponent } from './signup/signup.component';
     ReactiveFormsModule,
     PasswordModule,
     RouterModule,
-    PasswordModule
+    PasswordModule,
+    CaptchaModule,
+    MessageModule
   ],
 })
 export class AuthenticationModule {}

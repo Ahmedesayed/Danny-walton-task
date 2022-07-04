@@ -1,7 +1,6 @@
 import { ApiService } from '@app/@shared/services/api/api.service';
 import { first } from 'rxjs';
 import { IApi } from './iapi';
-import { IPaginatedResponse } from '../../../models/ipaginated-response';
 
 export class CRUD<T> implements IApi<T> {
   apiRoute: string = '';
@@ -13,25 +12,11 @@ export class CRUD<T> implements IApi<T> {
     return this.apiSrvc.get<T>(route, params).pipe(first());
   }
 
-  fetchRoutePaginated<T>(
-    route: string,
-    pageOptions: { pageNumber?: number; pageSize?: number } = {},
-    params = {}
-  ) {
-    return this.apiSrvc
-      .get<IPaginatedResponse<T>>(route, {
-        pageNumber: pageOptions.pageNumber,
-        pageSize: pageOptions.pageSize,
-        ...params,
-      })
-      .pipe(first());
-  }
 
   fetch(
-    pageOptions: { pageNumber?: number; pageSize?: number } = {},
     params = {}
   ) {
-    return this.fetchRoutePaginated<T>(this.apiRoute, pageOptions, params);
+    return this.fetchRoute<T[]>(this.apiRoute, params);
   }
 
   fetchById(id: string | number) {
@@ -44,11 +29,11 @@ export class CRUD<T> implements IApi<T> {
 
   update(data: any) {
     return this.apiSrvc
-      .put<T>(`${this.apiRoute}/${data.id}`, data)
+      .put<T>(`${this.apiRoute}`, data)
       .pipe(first());
   }
 
-  delete(ids: number[]) {
-    return this.apiSrvc.delete<boolean>(this.apiRoute, ids).pipe(first());
+  delete(id: number) {
+    return this.apiSrvc.delete<T[]>(this.apiRoute + '/' + id).pipe(first());
   }
 }

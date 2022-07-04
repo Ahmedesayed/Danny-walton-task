@@ -5,5 +5,5 @@ export const environment = {
   hmr: false,
   version: project.version,
   countrySettings: { country: 'UAE', countryCode: '+971', currency: 'AED' },
-  apiUrl: 'https://ahoyapis.azure-api.net/vendor/',
+  apiUrl: 'http://localhost:3080/api/',
 };

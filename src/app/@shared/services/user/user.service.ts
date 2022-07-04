@@ -1,38 +1,24 @@
+import { CRUD } from '@app/@shared/services/api/Crud';
+import { ApiService } from './../api/api.service';
 import { Injectable } from '@angular/core';
-import { StorageKey } from '../storage/storage-key';
-import { IUser } from '../../../modules/authentication/models/user/iuser';
-import { User } from '../../../modules/authentication/models/user/user';
-import { StorageService } from '../storage/storage.service';
+import { IUser } from '@app/models/iuser';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UserService {
-  private _user: IUser = new User();
+export class UserService extends CRUD<IUser> {
 
-  constructor(private strgSrvc: StorageService) {
-    this.getUserStored();
+  constructor(apiSrvc:ApiService) {
+    super(apiSrvc,'users')
   }
 
-  saveUser(user: IUser) {
-    this._user = new User(user);
-    this.strgSrvc.setData(StorageKey.user, user);
+  isUniqueEmail(email : string){
+    return this.fetchRoute<boolean>(`${this.apiRoute}/email`,{email})
   }
 
-  private getUserStored() {
-    this._user = new User(this.strgSrvc.getData<IUser>(StorageKey.user));
+  isUniqueUsername(username : string){
+    return this.fetchRoute<boolean>(`${this.apiRoute}/username`,{username})
   }
 
-  get User() {
-    return new User(this.strgSrvc.getData<IUser>(StorageKey.user));
-  }
 
-  update(user: IUser) {
-    let newUser = { ...this._user, ...user };
-    this.saveUser(newUser);
-  }
-
-  clearUser() {
-    this.strgSrvc.clear();
-  }
 }

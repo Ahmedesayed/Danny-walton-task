@@ -12,12 +12,11 @@ import { RippleModule } from 'primeng/ripple';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { ToolbarModule } from 'primeng/toolbar';
 import { HeaderComponent } from './header/header.component';
-import { MenuComponent } from './menu/menu.component';
 import { FormsModule } from '@angular/forms';
 import { SidebarModule } from 'primeng/sidebar';
 
 @NgModule({
-  declarations: [ShellComponent, HeaderComponent, MenuComponent],
+  declarations: [ShellComponent, HeaderComponent],
   imports: [
     CommonModule,
     ShellRoutingModule,

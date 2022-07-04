@@ -1,31 +1,20 @@
-const express = require('express');
+const express = require("express");
 const app = express(),
-      bodyParser = require("body-parser");
-      port = 3080,
-      fs = require('fs');
+  bodyParser = require("body-parser"),
+  port = 3080,
+  cors = require("cors"),
+  corsOptions = {
+    origin: "*",
+    credentials: true, //access-control-allow-credentials:true
+    optionSuccessStatus: 200,
+  },
+  routes = require("./app/routes"),
+  path = require('path');
 
-const users = [];
+app.use(cors(corsOptions), bodyParser.json(),express.static(path.join(__dirname, '/')));
 
-app.use(bodyParser.json());
-
-app.get('/api/users', (req, res) => {
-  res.json(users);
-});
-
-app.post('/api/user', (req, res) => {
-  const user = req.body.user;
-  users.push(user);
-  res.json("user addedd");
-});
-
-app.get('/', (req,res) => {
-    res.send('App Works !!!!');
-});
+routes(app);
 
 app.listen(port, () => {
-    console.log(`Server listening on the port::${port}`);
+  console.log(`Server listening on the port::${port}`);
 });
-
-function getUsers(){
-    
-}

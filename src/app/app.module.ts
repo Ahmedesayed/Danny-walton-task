@@ -16,6 +16,16 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from 'src/environments/environment';
 import { AuthGuard } from './guards/auth.guard';
+import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
+import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
+import timeGridPlugin from '@fullcalendar/timegrid';
+
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+  dayGridPlugin,
+  interactionPlugin,
+  timeGridPlugin
+]);
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,6 +44,7 @@ import { AuthGuard } from './guards/auth.guard';
     ConfirmPopupModule,
     MessageModule,
     ToastModule,
+    FullCalendarModule
   ],
   providers: [
     MessageService,

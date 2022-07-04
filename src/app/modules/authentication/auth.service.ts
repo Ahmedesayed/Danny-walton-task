@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { CredentialsService } from './credentials.service';
+import { Observable, tap } from 'rxjs';
+import { CredentialsService } from '../../@shared/services/credentials/credentials.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { saveAs } from 'file-saver';
+import { ApiService } from '@app/@shared/services/api/api.service';
+import { IUser } from '@app/models/iuser';
 
 export interface LoginContext {
   username: string;
   password: string;
-  remember?: boolean;
 }
+
+
 @Injectable({
   providedIn: 'root',
 })
@@ -17,7 +18,7 @@ export class AuthService {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private httpClient: HttpClient,
+    private apiSrvc: ApiService,
     private credentialsService: CredentialsService
   ) {}
 
@@ -27,27 +28,29 @@ export class AuthService {
    * @return The user credentials.
    */
   login(context: LoginContext): Observable<any> {
-    const url = '/org/token';
-    const body = new URLSearchParams();
-    body.set('username', context.username);
-    body.set('password', context.password);
-    body.set('grant_type', 'password');
-    body.set('response_type', 'token id_token');
-
-    return this.httpClient.post(url, body.toString(), {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded',
-      }),
-    });
+    return this.apiSrvc.post('login', context).pipe(tap((e)=>{
+      if(e) this.onAuthenticate(e);
+    }));
   }
 
-  signup(data:string) {
-    console.log(data)
-    saveAs(data, "users.json")
+   /**
+   * Create the user.
+   * @param context The signup parameters.
+   * @return The user credentials.
+   */
+  signup(context:IUser) {
+    return this.apiSrvc.post<IUser>('signup', context).pipe(tap((e)=>{
+      if(e) this.onAuthenticate(e);
+    }));
   }
 
   private getReturnUrl() {
     return this.route.snapshot.queryParams['returnUrl'] || '/';
+  }
+
+  onAuthenticate(credentials:IUser){
+    this.credentialsService.setCredentials(credentials)
+    this.router.navigateByUrl(this.getReturnUrl())
   }
 
   /**

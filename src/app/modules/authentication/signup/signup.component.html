@@ -5,7 +5,7 @@
   <div
     class="login-form flex flex-column justify-content-center align-items-center w-full px-4"
   >
-  <div class="col-12 text-blue-400 text-3xl mb-4">Signup</div>
+    <div class="col-12 text-blue-400 text-3xl mb-4">Signup</div>
 
     <form
       [formGroup]="formGroup"
@@ -26,6 +26,12 @@
             maxlength="25"
             formControlName="username"
           />
+          <p-message
+          styleClass="mt-2"
+          [hidden]="!formGroup.get('username')?.getError('userNameExists')"
+          severity="error"
+          text="Username already exists before!"
+        ></p-message>
         </div>
       </div>
       <div class="field grid w-full mb-4">
@@ -68,12 +74,19 @@
           <input
             pInputText
             id="email"
-            type="text"
+            type="email"
             class="inputfield w-full vn-input border-round shadow-1 border-gray-100 mt-2"
             placeholder="E.g. Ahmed@gmail.com"
             formControlName="email"
           />
+          <p-message
+          styleClass="mt-2"
+          [hidden]="!formGroup.get('email')?.getError('emailExists')"
+          severity="error"
+          text="Email already exists before!"
+        ></p-message>
         </div>
+
       </div>
 
       <div class="field grid w-full mb-3">
@@ -117,6 +130,8 @@
           />
         </div>
       </div>
+      <!-- i dont have keys -->
+      <p-captcha class="mb-3" siteKey="YOUR_SITE_KEY"></p-captcha>
     </form>
 
     <button
@@ -125,6 +140,7 @@
       label="SIGNUP"
       [loading]="isLoading"
       class="text-2xl bg-blue-400 border-round mt-4"
+      (click)="signup()"
     ></button>
   </div>
 </div>

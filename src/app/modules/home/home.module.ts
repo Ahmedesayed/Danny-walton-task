@@ -1,39 +1,34 @@
+import { MultiSelectModule } from 'primeng/multiselect';
+import { FullCalendarModule } from '@fullcalendar/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponentRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home/home.component';
 import { SharedComponentsModule } from 'src/app/@shared/shared-components.module';
 import { ButtonModule } from 'primeng/button';
-import { MultiSelectModule } from 'primeng/multiselect';
-import { AvatarModule } from 'primeng/avatar';
-import { BadgeModule } from 'primeng/badge';
 import { ScrollTopModule } from 'primeng/scrolltop';
 import { SkeletonModule } from 'primeng/skeleton';
 import { CalendarModule } from 'primeng/calendar';
-import { FormsModule } from '@angular/forms';
-import { ProgressBarModule } from 'primeng/progressbar';
-import { SelectButtonModule } from 'primeng/selectbutton';
-import { StepsModule } from 'primeng/steps';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddMeetingComponent } from './add-meeting/add-meeting.component';
+import { MeetingDetailsComponent } from './meeting-details/meeting-details.component';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 @NgModule({
-  declarations: [
-    HomeComponent,
-  ],
+  declarations: [HomeComponent, AddMeetingComponent, MeetingDetailsComponent],
   imports: [
     CommonModule,
     HomeComponentRoutingModule,
     SharedComponentsModule,
     ButtonModule,
-    AvatarModule,
-    BadgeModule,
     ScrollTopModule,
     SkeletonModule,
     CalendarModule,
     FormsModule,
-    ProgressBarModule,
-    SelectButtonModule,
+    ReactiveFormsModule,
+    FullCalendarModule,
+    InputTextareaModule,
     MultiSelectModule,
-    StepsModule,
   ],
 })
 export class HomeComponentModule {}

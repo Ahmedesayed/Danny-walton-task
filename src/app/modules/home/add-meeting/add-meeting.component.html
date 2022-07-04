@@ -1,0 +1,101 @@
+<div class="flex flex-column p-4">
+  <form
+    [formGroup]="formGroup"
+    (ngSubmit)="add()"
+    class="w-full flex flex-column align-items-center mb-5"
+  >
+    <div class="field grid w-full mb-4">
+      <label for="title" class="col-12 mb-2 font-bold required">Title</label>
+      <div class="col-12">
+        <input
+          pInputText
+          id="title"
+          type="text"
+          class="inputfield w-full vn-input border-round shadow-1 border-gray-100 mt-2"
+          placeholder="E.g. Google Interview"
+          maxlength="25"
+          formControlName="title"
+        />
+      </div>
+    </div>
+
+    <div class="field grid w-full mb-4">
+      <label for="description" class="col-12 mb-2 font-bold required"
+        >Description</label
+      >
+      <div class="col-12">
+        <textarea
+          [rows]="3"
+          [cols]="30"
+          pInputTextarea
+          [autoResize]="true"
+          id="description"
+          type="text"
+          class="inputfield w-full vn-input border-round shadow-1 border-gray-100 mt-2"
+          placeholder="E.g. Google Interview"
+          formControlName="description"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="field grid w-full mb-4">
+      <label for="start" class="col-12 mb-2 font-bold required">Start</label>
+      <div class="col-12">
+        <p-calendar
+          formControlName="start"
+          styleClass="inputfield w-full vn-input border-round shadow-1 border-gray-100 mt-2"
+          [showTime]="true"
+          [maxDate]="formGroup.get('end')?.value"
+          [hourFormat]="'12'"
+          appendTo="body"
+        ></p-calendar>
+      </div>
+    </div>
+
+    <div class="field grid w-full mb-4">
+      <label for="end" class="col-12 mb-2 font-bold required">End</label>
+      <div class="col-12">
+        <p-calendar
+          formControlName="end"
+          styleClass="inputfield w-full vn-input border-round shadow-1  mt-2"
+          [showTime]="true"
+          [minDate]="formGroup.get('start')?.value"
+          [hourFormat]="'12'"
+          appendTo="body"
+
+        ></p-calendar>
+      </div>
+    </div>
+
+    <div class="field grid w-full mb-4">
+      <label for="participents" class="col-12 mb-2 font-bold required"
+        >Participents</label
+      >
+      <div class="col-12">
+        <p-multiSelect
+          [options]="users"
+          styleClass="inputfield w-full vn-input border-round shadow-1 mt-2"
+          formControlName="participents"
+          appendTo="body"
+          optionLabel="firstName"
+        >
+        <!-- <ng-template let-value pTemplate="selectedItems">
+          {{value?.firstName}} {{value?.lastName}}
+      </ng-template> -->
+      <ng-template let-value pTemplate="item">
+          {{value?.firstName}} {{value?.lastName}}
+    </ng-template>
+    </p-multiSelect>
+      </div>
+    </div>
+  </form>
+  <div class="flex justify-content-between">
+    <button pButton label="SAVE" (click)="add()" *ngIf="!meeting?.id"></button>
+    <button
+      pButton
+      label="UPDATE"
+      (click)="update()"
+      *ngIf="meeting?.id"
+    ></button>
+  </div>
+</div>

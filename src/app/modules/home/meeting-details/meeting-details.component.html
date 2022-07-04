@@ -1,0 +1,12 @@
+<div class="flex flex-column p-4" >
+  <div class="mb-3">Meeting Starts at <b>{{meeting?.start | date : "dd/mm/yy hh:mm a"}}</b> to <b>{{meeting?.end | date : "dd/MM/yy hh:mm a"}}</b></div>
+  <div class="mb-3" >Description : {{meeting?.description}}  </div>
+  <div  >Participents :</div>
+  <ul class="mb-5">
+    <li  *ngFor="let p of meeting?.participents" >{{p.firstName}} {{p.lastName}}</li>
+  </ul>
+<div class="flex justify-content-between" >
+  <button pButton icon="pi pi-trash" class="p-button-danger" (click)="delete($event)" ></button>
+  <button pButton label="UPDATE" (click)="update()" ></button>
+</div>
+</div>
